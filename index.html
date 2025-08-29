@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CET138 Full Stack Development ePortfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a3c34;
+            --secondary-color: #2a9d8f;
+            --accent-color: #e76f51;
+            --success-color: #52b788;
+            --warning-color: #f4a261;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navbar-text {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #457b9d 0%, #1d3557 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .demo-box {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .animated-element {
+            width: 100px;
+            height: 100px;
+            background: var(--secondary-color);
+            margin: 20px auto;
+            border-radius: 50%;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .responsive-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .responsive-item {
+            background: var(--success-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .js-counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .progress-demo {
+            margin: 20px 0;
+        }
+
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+
+        .form-demo {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .validation-message {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-code"></i> CET138 ePortfolio
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#fullstack">Full Stack</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#html">HTML</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#css">CSS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bootstrap">Bootstrap</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#javascript">JavaScript</a></li>
+                </ul>
+                <span class="navbar-text ms-3">
+                    Nikhil Chaudhary | <a href="mailto:btit24b.nkl@ismt.edu.np" class="text-white">btit24b.nkl@ismt.edu.np</a> | University of Sunderland
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <h1><i class="fas fa-laptop-code"></i> Full Stack Development Portfolio</h1>
+            <p class="lead">Demonstrating comprehensive understanding of modern web development technologies</p>
+            <div class="mt-4">
+                <span class="skill-badge">HTML5</span>
+                <span class="skill-badge">CSS3</span>
+                <span class="skill-badge">Bootstrap</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">Responsive Design</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Stack Development Section -->
+    <section id="fullstack" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-layer-group"></i> What is Full Stack Development?</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Understanding Full Stack Development</h4>
+                            <p>Full stack development refers to the practice of working on both the frontend (client-side) and backend (server-side) portions of web applications. A full stack developer has the skills to handle:</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-desktop text-primary"></i> Frontend Technologies</h5>
+                                    <ul>
+                                        <li>HTML5 - Structure and content</li>
+                                        <li>CSS3 - Styling and layout</li>
+                                        <li>JavaScript - Interactivity and logic</li>
+                                        <li>Frameworks (React, Vue, Angular)</li>
+                                        <li>Responsive design principles</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-server text-success"></i> Backend Technologies</h5>
+                                    <ul>
+                                        <li>Server languages (Node.js, Python, PHP)</li>
+                                        <li>Databases (MySQL, MongoDB)</li>
+                                        <li>APIs and web services</li>
+                                        <li>Server management</li>
+                                        <li>Security and authentication</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="demo-box mt-4">
+                                <h6>Full Stack Architecture Visualization</h6>
+                                <div class="d-flex justify-content-around align-items-center flex-wrap">
+                                    <div class="text-center m-2">
+                                        <i class="fas fa-mobile-alt fa-3x text-primary"></i>
+                                        <p class="mt-2">Frontend<br><small>User Interface</small></p>
+                                    </div>
+                                    <div class="text-center m-2">
+                                        <i class="fas fa-exchange-alt fa-2x text-warning"></i>
+                                        <p class="mt-2">API<br><small>Communication</small></p>
+                                    </div>
+                                    <div class="text-center m-2">
+                                        <i class="fas fa-server fa-3x text-success"></i>
+                                        <p class="mt-2">Backend<br><small>Server Logic</small></p>
+                                    </div>
+                                    <div class="text-center m-2">
+                                        <i class="fas fa-database fa-3x text-info"></i>
+                                        <p class="mt-2">Database<br><small>Data Storage</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HTML Section -->
+    <section id="html" class="section-padding bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fab fa-html5 text-danger"></i> HTML Mastery</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Semantic HTML Structure</h4>
+                            <p>HTML5 provides semantic elements that give meaning to web content, improving accessibility and SEO.</p>
+                            
+                            <div class="code-example">
+&lt;article&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Article Title&lt;/h1&gt;
+    &lt;time datetime="2024-01-15"&gt;January 15, 2024&lt;/time&gt;
+  &lt;/header&gt;
+  &lt;section&gt;
+    &lt;p&gt;Article content goes here...&lt;/p&gt;
+  &lt;/section&gt;
+  &lt;footer&gt;
+    &lt;p&gt;Author: Nikhil Chaudhary&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Interactive Form Demo</h4>
+                            <p>Demonstrating HTML5 form elements with validation:</p>
+                            
+                            <div class="form-demo">
+                                <form id="htmlForm" novalidate>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email:</label>
+                                        <input type="email" class="form-control" id="email" required value="btit24b.nkl@ismt.edu.np">
+                                        <div class="validation-message text-danger" id="emailError"></div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="age" class="form-label">Age:</label>
+                                        <input type="number" class="form-control" id="age" min="18" max="100" required>
+                                        <div class="validation-message text-danger" id="ageError"></div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="website" class="form-label">Website:</label>
+                                        <input type="url" class="form-control" id="website">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="experience" class="form-label">Experience Level:</label>
+                                        <select class="form-control" id="experience" required>
+                                            <option value="">Select...</option>
+                                            <option value="beginner">Beginner</option>
+                                            <option value="intermediate">Intermediate</option>
+                                            <option value="advanced">Advanced</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                                <div id="formResult" class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CSS Section -->
+    <section id="css" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fab fa-css3-alt text-primary"></i> CSS Styling & Animation</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>CSS Grid & Flexbox</h4>
+                            <p>Modern layout techniques for responsive design:</p>
+                            
+                            <div class="responsive-demo">
+                                <div class="responsive-item">Grid Item 1</div>
+                                <div class="responsive-item">Grid Item 2</div>
+                                <div class="responsive-item">Grid Item 3</div>
+                                <div class="responsive-item">Grid Item 4</div>
+                            </div>
+
+                            <div class="code-example">
+.responsive-demo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>CSS Animations</h4>
+                            <p>Creating engaging user experiences with CSS animations:</p>
+                            
+                            <div class="demo-box">
+                                <div class="animated-element"></div>
+                                <p>Bouncing animation using CSS keyframes</p>
+                            </div>
+
+                            <div class="code-example">
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap Section -->
+    <section id="bootstrap" class="section-padding bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fab fa-bootstrap text-purple"></i> Bootstrap Framework</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Bootstrap Components Demo</h4>
+                            <p>Bootstrap provides pre-built components for rapid development:</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Alert Components</h6>
+                                    <div class="alert alert-success" role="alert">
+                                        <i class="fas fa-check-circle"></i> Success alert example
+                                    </div>
+                                    <div class="alert alert-warning" role="alert">
+                                        <i class="fas fa-exclamation-triangle"></i> Warning alert example
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Button Variations</h6>
+                                    <button class="btn btn-primary me-2">Primary</button>
+                                    <button class="btn btn-success me-2">Success</button>
+                                    <button class="btn btn-outline-danger">Outline</button>
+                                </div>
+                            </div>
+
+                            <div class="progress-demo">
+                                <h6>Progress Bars</h6>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" style="width: 75%">HTML - 75%</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-info" style="width: 80%">CSS - 80%</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-warning" style="width: 70%">JavaScript - 70%</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bootstrapModal">
+                                    Launch Bootstrap Modal
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript Section -->
+    <section id="javascript" class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fab fa-js-square text-warning"></i> JavaScript Functionality</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Interactive Counter</h4>
+                            <p>Demonstrating DOM manipulation and event handling:</p>
+                            
+                            <div class="demo-box">
+                                <div class="js-counter" id="counter">0</div>
+                                <button class="btn btn-success me-2" onclick="incrementCounter()">
+                                    <i class="fas fa-plus"></i> Increment
+                                </button>
+                                <button class="btn btn-danger me-2" onclick="decrementCounter()">
+                                    <i class="fas fa-minus"></i> Decrement
+                                </button>
+                                <button class="btn btn-secondary" onclick="resetCounter()">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Dynamic Content</h4>
+                            <p>Creating and manipulating HTML elements with JavaScript:</p>
+                            
+                            <div class="demo-box">
+                                <input type="text" class="form-control mb-3" id="todoInput" placeholder="Enter a task...">
+                                <button class="btn btn-primary mb-3" onclick="addTodo()">
+                                    <i class="fas fa-plus"></i> Add Task
+                                </button>
+                                <ul id="todoList" class="list-group"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>JavaScript Concepts Demonstrated</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><strong>DOM Manipulation:</strong> Selecting and modifying elements</li>
+                                        <li><strong>Event Handling:</strong> Responding to user interactions</li>
+                                        <li><strong>Functions:</strong> Reusable code blocks</li>
+                                        <li><strong>Variables:</strong> Data storage and manipulation</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                        <li><strong>Arrays:</strong> Managing collections of data</li>
+                                        <li><strong>Conditionals:</strong> Decision-making logic</li>
+                                        <li><strong>Loops:</strong> Iterating through data</li>
+                                        <li><strong>Form Validation:</strong> Ensuring data integrity</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="bootstrapModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Bootstrap Modal Demo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This is a Bootstrap modal component demonstrating:</p>
+                    <ul>
+                        <li>Modal overlay functionality</li>
+                        <li>Responsive design</li>
+                        <li>Accessibility features</li>
+                        <li>Easy integration with JavaScript</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 CET138 Full Stack Development ePortfolio</p>
+            <p>Demonstrating comprehensive understanding of modern web development technologies</p>
+            <p>Built by Nikhil Chaudhary | <a href="mailto:btit24b.nkl@ismt.edu.np">btit24b.nkl@ismt.edu.np</a> | University of Sunderland</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Counter functionality
+        let counter = 0;
+        
+        function incrementCounter() {
+            counter++;
+            document.getElementById('counter').textContent = counter;
+        }
+        
+        function decrementCounter() {
+            counter--;
+            document.getElementById('counter').textContent = counter;
+        }
+        
+        function resetCounter() {
+            counter = 0;
+            document.getElementById('counter').textContent = counter;
+        }
+
+        // Todo list functionality
+        let todos = [];
+        
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const todoText = input.value.trim();
+            
+            if (todoText === '') {
+                alert('Please enter a task!');
+                return;
+            }
+            
+            todos.push({
+                id: Date.now(),
+                text: todoText,
+                completed: false
+            });
+            
+            input.value = '';
+            renderTodos();
+        }
+        
+        function removeTodo(id) {
+            todos = todos.filter(todo => todo.id !== id);
+            renderTodos();
+        }
+        
+        function toggleTodo(id) {
+            todos = todos.map(todo => 
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            );
+            renderTodos();
+        }
+        
+        function renderTodos() {
+            const todoList = document.getElementById('todoList');
+            todoList.innerHTML = '';
+            
+            todos.forEach(todo => {
+                const li = document.createElement('li');
+                li.className = `list-group-item d-flex justify-content-between align-items-center ${todo.completed ? 'list-group-item-success' : ''}`;
+                
+                li.innerHTML = `
+                    <span style="${todo.completed ? 'text-decoration: line-through;' : ''}">${todo.text}</span>
+                    <div>
+                        <button class="btn btn-sm btn-outline-success me-1" onclick="toggleTodo(${todo.id})">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="removeTodo(${todo.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                todoList.appendChild(li);
+            });
+        }
+
+        // Form validation
+        document.getElementById('htmlForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email');
+            const age = document.getElementById('age');
+            const emailError = document.getElementById('emailError');
+            const ageError = document.getElementById('ageError');
+            const formResult = document.getElementById('formResult');
+            
+            // Clear previous errors
+            emailError.textContent = '';
+            ageError.textContent = '';
+            
+            let isValid = true;
+            
+            // Email validation
+            if (!email.value) {
+                emailError.textContent = 'Email is required';
+                isValid = false;
+            } else if (!email.validity.valid) {
+                emailError.textContent = 'Please enter a valid email address';
+                isValid = false;
+            }
+            
+            // Age validation
+            if (!age.value) {
+                ageError.textContent = 'Age is required';
+                isValid = false;
+            } else if (age.value < 18 || age.value > 100) {
+                ageError.textContent = 'Age must be between 18 and 100';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                formResult.innerHTML = '<div class="alert alert-success"><i class="fas fa-check-circle"></i> Form submitted successfully! This demonstrates HTML5 validation and JavaScript form handling.</div>';
+            } else {
+                formResult.innerHTML = '<div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> Please correct the errors above.</div>';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add todo on Enter key press
+        document.getElementById('todoInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+    </script>
+</body> 
